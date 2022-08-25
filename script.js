@@ -10,7 +10,7 @@ class Ball{
   }
   drawBall() {
     fill("yellow");
-
+    elipse(this.x, this.y, this.width, this.height, this.vy)
 
     this.vy += gravity;
   }
