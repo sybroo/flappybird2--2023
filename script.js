@@ -1,10 +1,12 @@
-var gravity, Ball1;
+var gravity, ball;
 var gameState = 1;
-
+var block;
 let img;
+
 function preload() {
   img = loadImage('menu.jpg');
 }
+
 class Ball {
   constructor(x, y, w, h, vy, c) {
     this.x = x;
@@ -35,12 +37,27 @@ class Ball {
   }
 }
 
+class Block {
+  constructor(x, y, w, h, vx, c) {
+    this.x = x;
+    this.y = y;
+    this.width = w;
+    this.height = h;
+    this.vx = vx;
+    this.color = c;
+  }
 
+  drawBlock() {
+    fill(this.color)
+    rect(this.x, this.y, this.width, this.height);
+  }
+}
 
 function setup() {
   createCanvas(700, 400);
   gravity = 0.25;
-  Ball1 = new Ball(250, 200, 20, 20, 0, "red");
+  ball = new Ball(250, 200, 20, 20, 0, "red");
+  block = new Block(200,380,300,400,0,"orange")
 }
 
 function draw() {
@@ -57,9 +74,6 @@ function draw() {
   }
 }
 
-
-
-
 function menu() {
   fill("black")
   image(img, 0, 0, width, height);
@@ -68,10 +82,12 @@ function menu() {
   text("MADE BY SYB", 280, 325)
   textSize(18);
 }
+
 function game() {
   background(225);
-  Ball1.drawBall();
-
+  ball.drawBall();
+  block.drawBlock();
+}
 
 function gameover() {
   background('black')
@@ -80,11 +96,10 @@ function gameover() {
   text("gemaakt door Syb", 150, 325)
 }
 
-
 function keyPressed() {
-  (keyCode);
+  console.log(keyCode);
   if (keyCode == 32) {
-    Ball1.vy = Ball1.vy - 5;
+    ball.vy = ball.vy - 5;
   }
 
   if (keyCode == 27) {
@@ -92,8 +107,9 @@ function keyPressed() {
   }
   if (keyCode == 13) {
     if (gameState != 1) {
-      ball1 = new Ball(250, 200, 20, 20, 0);
+      ball = new Ball(250, 200, 20, 20, 0);
       gameState = 1;
+      block = new Block(200,400,300,400,0)
     }
   }
 }
