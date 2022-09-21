@@ -2,6 +2,7 @@ var gravity, ball;
 var gameState = 1;
 var block;
 let img;
+var rects = [];
 
 function preload() {
   img = loadImage('menu.jpg');
@@ -38,17 +39,18 @@ class Ball {
 }
 
 class Block {
-  constructor(x, y, w, h, vx, c) {
+  constructor(x, y, w, h, c) {
     this.x = x;
     this.y = y;
     this.width = w;
     this.height = h;
-    this.vx = vx;
+    this.vx = -1
     this.color = c;
   }
 
   drawBlock() {
     fill(this.color)
+    this.x = this.x + this.vx;
     rect(this.x, this.y, this.width, this.height);
   }
 }
@@ -57,7 +59,7 @@ function setup() {
   createCanvas(700, 400);
   gravity = 0.25;
   ball = new Ball(250, 200, 20, 20, 0, "red");
-  block = new Block(200,380,300,400,0,"orange")
+  block = new Block(400, 200, 50, 200, "orange")
 }
 
 function draw() {
@@ -87,7 +89,22 @@ function game() {
   background(225);
   ball.drawBall();
   block.drawBlock();
+
+  if (frameCount % 60 == 0) {
+    addBlocks();
+
+    // remove pipes
+    if (rects.length > 6) {
+      rects.splice(0, 2);
+    }
+  }
+
+  rects.forEach((block) => {
+    block.drawBlock();
+ });
 }
+
+
 
 function gameover() {
   background('black')
@@ -106,10 +123,23 @@ function keyPressed() {
     gameState = 0;
   }
   if (keyCode == 13) {
-    if (gameState != 1) {
-      ball = new Ball(250, 200, 20, 20, 0);
-      gameState = 1;
-      block = new Block(200,400,300,400,0)
-    }
+    console.log("gameState != 1")
+    gameState = 1;
+    ball = new Ball(250, 200, 20, 20, 0, "red");
+    //block = new Block(400, 200, 50, 200, "orange");
   }
+}
+
+function addBlocks() {
+
+  let randHeight = random(height / 2);
+  let gapHeight = 150;
+
+
+  let newRectTop = new Block(640, 0, 60, randHeight, "green");
+  let newRectBot = new Block(640, randHeight + gapHeight, 60, height + (randHeight + gapHeight), "green");
+
+
+  rects.push(newRectBot);
+  rects.push(newRectTop);
 }
