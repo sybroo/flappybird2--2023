@@ -44,15 +44,23 @@ class Block {
     this.y = y;
     this.width = w;
     this.height = h;
-    this.vx = -1
+    this.vx = -6
     this.color = c;
-  }
+  
 
   drawBlock() {
     fill(this.color)
     this.x = this.x + this.vx;
     rect(this.x, this.y, this.width, this.height);
   }
+}
+
+isColliding() {   
+    if (ball.x + ball.w > this.x && ball.x < this.x + this.w) 
+      if (ball.y + ball.h > this.y && ball.y < this.y + this.h) {
+    gameState = 1;
+      }
+ }
 }
 
 function setup() {
@@ -90,11 +98,11 @@ function game() {
   ball.drawBall();
   block.drawBlock();
 
-  if (frameCount % 60 == 0) {
+  if (frameCount % 50 == 0) {
     addBlocks();
 
     // remove pipes
-    if (rects.length > 6) {
+    if (rects.length > 12) {
       rects.splice(0, 2);
     }
   }
