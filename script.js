@@ -12,15 +12,15 @@ class Ball {
   constructor(x, y, w, h, vy, c) {
     this.x = x;
     this.y = y;
-    this.width = w;
-    this.height = h;
+    this.w = w;
+    this.h = h;
     this.vy = vy;
     this.color = c;
   }
 
   drawBall() {
     fill(this.color)
-    ellipse(this.x, this.y, this.width, this.height);
+    ellipse(this.x, this.y, this.w, this.h);
 
 
     this.vy += gravity;
@@ -42,32 +42,31 @@ class Block {
   constructor(x, y, w, h, c) {
     this.x = x;
     this.y = y;
-    this.width = w;
-    this.height = h;
+    this.w = w;
+    this.h = h;
     this.vx = -6
     this.color = c;
-  
+  }
 
   drawBlock() {
     fill(this.color)
     this.x = this.x + this.vx;
-    rect(this.x, this.y, this.width, this.height);
+    rect(this.x, this.y, this.w, this.h);
   }
-}
 
-isColliding() {   
-    if (ball.x + ball.w > this.x && ball.x < this.x + this.w) 
+  isColliding() {    
+    if (ball.x + ball.w > this.x && ball.x < this.x + this.w)
       if (ball.y + ball.h > this.y && ball.y < this.y + this.h) {
-    gameState = 1;
+        gameState = 0;
       }
- }
+  }
 }
 
 function setup() {
   createCanvas(700, 400);
   gravity = 0.25;
   ball = new Ball(250, 200, 20, 20, 0, "red");
-  block = new Block(400, 200, 50, 200, "orange")
+  block = new Block(400, 200, 50, 200, "green" )
 }
 
 function draw() {
@@ -109,7 +108,8 @@ function game() {
 
   rects.forEach((block) => {
     block.drawBlock();
- });
+    block.isColliding();
+  });
 }
 
 
