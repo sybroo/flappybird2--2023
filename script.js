@@ -39,10 +39,10 @@ class Ball {
 }
 
 class Block {
-  constructor(x, y, w, h, c) {
+  constructor(x, y, h, c) {
     this.x = x;
     this.y = y;
-    this.w = w;
+    this.w = 60;
     this.h = h;
     this.vx = -6
     this.color = c;
@@ -66,7 +66,7 @@ function setup() {
   createCanvas(700, 400);
   gravity = 0.25;
   ball = new Ball(250, 200, 20, 20, 0, "red");
-  block = new Block(400, 200, 50, 200, "green" )
+  block = new Block(400, 200, 200, "green" )
 }
 
 function draw() {
@@ -144,8 +144,8 @@ function addBlocks() {
   let gapHeight = 150;
 
 
-  let newRectTop = new Block(640, 0, 60, randHeight, "green");
-  let newRectBot = new Block(640, randHeight + gapHeight, 60, height + (randHeight + gapHeight), "green");
+  let newRectTop = new Block(640, 0, randHeight, "green");
+  let newRectBot = new Block(640, randHeight + gapHeight, height + (randHeight + gapHeight), "green");
 
 
   rects.push(newRectBot);
