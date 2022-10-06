@@ -58,8 +58,7 @@ class Block {
   isColliding() {    
     if (ball.x + ball.w > this.x && ball.x < this.x + this.w)
       if (ball.y + ball.h > this.y && ball.y < this.y + this.h) {
-        gameState = 0;
-        rects = [];
+        gameState = 2
       }
   }
 }
@@ -84,6 +83,7 @@ function draw() {
   }
 }
 
+
 function menu() {
   fill("black")
   image(img, 0, 0, width, height);
@@ -91,7 +91,18 @@ function menu() {
   text("WELCOME!", 280, 100)
   text("MADE BY SYB", 280, 325)
   textSize(18);
+
+  if (keyCode == 13) {
+    reset()
+    gameState = 1;
+ }
 }
+  
+  function reset(){
+  gamestate = 0;
+  rects = [];
+  ball = new Ball(250, 200, 20, 20, 0, "red");
+  }
 
 function game() {
   background(225);
@@ -114,11 +125,17 @@ function game() {
 
 
 
+
+
 function gameover() {
   background('black')
   text("Press Esc to go to main menu", 150, 200)
   text("GAME OVER", 150, 100)
   text("gemaakt door Syb", 150, 325)
+
+   if(keyCode == 27){
+   gameState = 0;
+ }
 }
 
 function keyPressed() {
@@ -127,14 +144,6 @@ function keyPressed() {
     ball.vy = ball.vy - 5;
   }
 
-  if (keyCode == 27) {
-    gameState = 0;
-  }
-  if (keyCode == 13) {
-    console.log("gameState != 1")
-    gameState = 1;
-    ball = new Ball(250, 200, 20, 20, 0, "red");
-  }
 }
 
 
