@@ -59,6 +59,7 @@ class Block {
     if (ball.x + ball.w > this.x && ball.x < this.x + this.w)
       if (ball.y + ball.h > this.y && ball.y < this.y + this.h) {
         gameState = 0;
+        rects = [];
       }
   }
 }
@@ -118,10 +119,6 @@ function gameover() {
   text("Press Esc to go to main menu", 150, 200)
   text("GAME OVER", 150, 100)
   text("gemaakt door Syb", 150, 325)
-
-//   if (keycode = 27){
-//     Reset();
-//   gameState = 1;
 }
 
 function keyPressed() {
