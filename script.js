@@ -3,6 +3,7 @@ var gameState = 1;
 var block;
 let img;
 var rects = [];
+var addBlocks
 
 function preload() {
   img = loadImage('menu.jpg');
@@ -66,7 +67,6 @@ function setup() {
   createCanvas(700, 400);
   gravity = 0.25;
   ball = new Ball(250, 200, 20, 20, 0, "red");
-  block = new Block(400, 200, 200, "green" )
 }
 
 function draw() {
@@ -95,7 +95,6 @@ function menu() {
 function game() {
   background(225);
   ball.drawBall();
-  block.drawBlock();
 
   if (frameCount % 50 == 0) {
     addBlocks();
@@ -119,6 +118,10 @@ function gameover() {
   text("Press Esc to go to main menu", 150, 200)
   text("GAME OVER", 150, 100)
   text("gemaakt door Syb", 150, 325)
+
+//   if (keycode = 27){
+//     Reset();
+//   gameState = 1;
 }
 
 function keyPressed() {
@@ -134,20 +137,18 @@ function keyPressed() {
     console.log("gameState != 1")
     gameState = 1;
     ball = new Ball(250, 200, 20, 20, 0, "red");
-    //block = new Block(400, 200, 50, 200, "orange");
   }
 }
+
 
 function addBlocks() {
 
   let randHeight = random(height / 2);
   let gapHeight = 150;
 
-
   let newRectTop = new Block(640, 0, randHeight, "green");
   let newRectBot = new Block(640, randHeight + gapHeight, height + (randHeight + gapHeight), "green");
 
-
   rects.push(newRectBot);
   rects.push(newRectTop);
-}
+ }
