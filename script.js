@@ -1,28 +1,31 @@
+
 var gravity, ball;
-var gameState = 1;
+var gameState = 0;
 var block;
 let img;
 var rects = [];
 var addBlocks
 
 function preload() {
-  img = loadImage('menu.jpg');
+  img = loadImage('foto/menu.jpg');
+  penisUp = loadImage('foto/penisUp.png');
+  penisDown = loadImage('foto/penisDown.png');
+  mario = loadImage('foto/mario.png');
 }
 
 class Ball {
-  constructor(x, y, w, h, vy, c) {
+  constructor(x, y, w, h, vy,) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
     this.vy = vy;
-    this.color = c;
+
   }
 
   drawBall() {
-    fill(this.color)
+    fill(0)
     ellipse(this.x, this.y, this.w, this.h);
-
 
     this.vy += gravity;
 
@@ -40,25 +43,25 @@ class Ball {
 }
 
 class Block {
-  constructor(x, y, h, c) {
+  constructor(img , x , y , h, c) {
     this.x = x;
     this.y = y;
     this.w = 60;
     this.h = h;
     this.vx = -6
     this.color = c;
+    this.img = img;
   }
-
+  
   drawBlock() {
-    fill(this.color)
     this.x = this.x + this.vx;
-    rect(this.x, this.y, this.w, this.h);
+    image(this.img, this.x, this.y, this.w, this.h);
   }
 
   isColliding() {    
     if (ball.x + ball.w > this.x && ball.x < this.x + this.w)
       if (ball.y + ball.h > this.y && ball.y < this.y + this.h) {
-        gameState = 2
+        gameState = 2;
       }
   }
 }
@@ -66,7 +69,7 @@ class Block {
 function setup() {
   createCanvas(700, 400);
   gravity = 0.25;
-  ball = new Ball(250, 200, 20, 20, 0, "red");
+  ball = new Ball(250, 200, 20, 20, 0,);
 }
 
 function draw() {
@@ -79,7 +82,7 @@ function draw() {
   }
 
   if (gameState == 2) {
-    gameover();
+    gameOver();
   }
 }
 
@@ -101,11 +104,12 @@ function menu() {
   function reset(){
   gamestate = 0;
   rects = [];
-  ball = new Ball(250, 200, 20, 20, 0, "red");
+  ball = new Ball(250, 200, 20, 20, 0,);
   }
 
 function game() {
   background(225);
+  
   ball.drawBall();
 
   if (frameCount % 50 == 0) {
@@ -127,8 +131,10 @@ function game() {
 
 
 
-function gameover() {
-  background('black')
+function gameOver() {
+  background(0)
+
+  fill(255)
   text("Press Esc to go to main menu", 150, 200)
   text("GAME OVER", 150, 100)
   text("gemaakt door Syb", 150, 325)
@@ -152,8 +158,8 @@ function addBlocks() {
   let randHeight = random(height / 2);
   let gapHeight = 150;
 
-  let newRectTop = new Block(640, 0, randHeight, "green");
-  let newRectBot = new Block(640, randHeight + gapHeight, height + (randHeight + gapHeight), "green");
+  let newRectTop = new Block(penisDown,740, 0, randHeight, "green");
+  let newRectBot = new Block(penisUp,740, randHeight + gapHeight, height + (randHeight + gapHeight), "green");
 
   rects.push(newRectBot);
   rects.push(newRectTop);
