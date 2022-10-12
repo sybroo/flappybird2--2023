@@ -11,6 +11,7 @@ function preload() {
   penisUp = loadImage('foto/penisUp.png');
   penisDown = loadImage('foto/penisDown.png');
   mario = loadImage('foto/mario.png');
+  dead = loadImage ('foto/dead.gif')
 }
 
 class Ball {
@@ -70,6 +71,7 @@ function setup() {
   createCanvas(700, 400);
   gravity = 0.25;
   ball = new Ball(250, 200, 20, 20, 0,);
+
 }
 
 function draw() {
@@ -132,12 +134,14 @@ function game() {
 
 
 function gameOver() {
-  background(0)
-
-  fill(255)
-  text("Press Esc to go to main menu", 150, 200)
+  background(dead, 0, 0)
+  fill(0)
+  text("Press Esc to go to menu", 30, 200) 
   text("GAME OVER", 150, 100)
-  text("gemaakt door Syb", 150, 325)
+  textSize(60)
+   
+
+
 
    if(keyCode == 27){
    gameState = 0;
