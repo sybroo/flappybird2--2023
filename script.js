@@ -5,28 +5,29 @@ var block;
 let img;
 var rects = [];
 var addBlocks
+var score = 0;
 
 function preload() {
   img = loadImage('foto/menu.jpg');
-  penisUp = loadImage('foto/penisUp.png');
-  penisDown = loadImage('foto/penisDown.png');
+  buisUp = loadImage('foto/buis.webp'); //pijpenplaajte aanpassen dagoe syb
+  penisDown = loadImage('foto/mario.png');
   mario = loadImage('foto/mario.png');
   dead = loadImage ('foto/dead.gif')
 }
 
 class Ball {
-  constructor(x, y, w, h, vy,) {
+  constructor(img, x, y, w, h, vy,) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
     this.vy = vy;
-
+    this.img = img
   }
 
   drawBall() {
     fill(0)
-    ellipse(this.x, this.y, this.w, this.h);
+    image(this.img, this.x, this.y, this.w, this.h);
 
     this.vy += gravity;
 
@@ -70,7 +71,7 @@ class Block {
 function setup() {
   createCanvas(700, 400);
   gravity = 0.25;
-  ball = new Ball(250, 200, 20, 20, 0,);
+  ball = new Ball(mario, 250, 200, 60, 60,0 );
 
 }
 
@@ -106,12 +107,13 @@ function menu() {
   function reset(){
   gamestate = 0;
   rects = [];
-  ball = new Ball(250, 200, 20, 20, 0,);
+  ball = new Ball(mario, 250, 200, 60, 60, 0);
+  score = 0;
   }
 
 function game() {
   background(225);
-  
+  text("Score: " + score, 10, 30);
   ball.drawBall();
 
   if (frameCount % 50 == 0) {
@@ -122,7 +124,9 @@ function game() {
       rects.splice(0, 2);
     }
   }
-
+ if (frameCount % 50 == 0 && rects.length > 4) {
+    score ++;
+  }
   rects.forEach((block) => {
     block.drawBlock();
     block.isColliding();
@@ -163,7 +167,7 @@ function addBlocks() {
   let gapHeight = 150;
 
   let newRectTop = new Block(penisDown,740, 0, randHeight, "green");
-  let newRectBot = new Block(penisUp,740, randHeight + gapHeight, height + (randHeight + gapHeight), "green");
+  let newRectBot = new Block(buisUp,740, randHeight + gapHeight, height + (randHeight + gapHeight), "green");
 
   rects.push(newRectBot);
   rects.push(newRectTop);
