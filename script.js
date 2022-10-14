@@ -71,7 +71,7 @@ class Block {
 function setup() {
   createCanvas(700, 400);
   gravity = 0.25;
-  ball = new Ball(mario, 250, 200, 60, 60,0 );
+  ball = new Ball(mario, 250, 200, 50, 50,0 );
 
 }
 
@@ -107,7 +107,7 @@ function menu() {
   function reset(){
   gamestate = 0;
   rects = [];
-  ball = new Ball(mario, 250, 200, 60, 60, 0);
+  ball = new Ball(mario, 250, 200, 50, 50, 0);
   score = 0;
   }
 
@@ -116,7 +116,7 @@ function game() {
   text("Score: " + score, 10, 30);
   ball.drawBall();
 
-  if (frameCount % 50 == 0) {
+  if (frameCount % 65 == 0) {
     addBlocks();
 
     // remove pipes
@@ -124,7 +124,7 @@ function game() {
       rects.splice(0, 2);
     }
   }
- if (frameCount % 50 == 0 && rects.length > 4) {
+ if (frameCount % 65 == 0 && rects.length > 3) {
     score ++;
   }
   rects.forEach((block) => {
@@ -166,7 +166,7 @@ function addBlocks() {
   let randHeight = random(height / 2);
   let gapHeight = 150;
 
-  let newRectTop = new Block(penisDown,740, 0, randHeight, "green");
+  let newRectTop = new Block(buisUp,740, 0, randHeight, "green");
   let newRectBot = new Block(buisUp,740, randHeight + gapHeight, height + (randHeight + gapHeight), "green");
 
   rects.push(newRectBot);
