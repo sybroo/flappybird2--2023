@@ -13,8 +13,10 @@ function preload() {
   buisDown = loadImage('foto/buisdown.webp');
   mario = loadImage('foto/mario.png');
   dead = loadImage ('foto/dead.gif');
+  stad = loadImage ('foto/city.gif');
   heehee = loadSound('music/hee-hee.mp3');
-  
+  jump = loadSound('music/springen.mp3');
+  doodgeluid = loadSound('music/shutdown.mp3');
 }
 
 class Ball {
@@ -66,6 +68,8 @@ class Block {
     if (ball.x + ball.w > this.x && ball.x < this.x + this.w)
       if (ball.y + ball.h > this.y && ball.y < this.y + this.h) {
         gameState = 2;
+        doodgeluid.play();
+        heehee.stop();
       }
   }
 }
@@ -114,8 +118,10 @@ function menu() {
   }
 
 function game() {
-  background(225);
+  background(stad,0,0)
+  fill(225);
   text("Score: " + score, 10, 30);
+
   ball.drawBall();
 
   if (frameCount % 65 == 0) {
@@ -128,6 +134,7 @@ function game() {
   }
  if (frameCount % 65 == 0 && rects.length > 3) {
     score ++;
+    heehee.play();
   }
   rects.forEach((block) => {
     block.drawBlock();
@@ -140,7 +147,7 @@ function game() {
 
 
 function gameOver() {
-  background(dead, 0, 0)
+  background(dead,0,0)
   fill(0)
   text("Press Esc to go to menu", 30, 200) 
   text("GAME OVER", 150, 100)
@@ -158,6 +165,7 @@ function keyPressed() {
   console.log(keyCode);
   if (keyCode == 32) {
     ball.vy = ball.vy - 5;
+    jump.play();
   }
 
 }
