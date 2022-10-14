@@ -10,9 +10,11 @@ var score = 0;
 function preload() {
   img = loadImage('foto/menu.jpg');
   buisUp = loadImage('foto/buis.webp'); //pijpenplaajte aanpassen dagoe syb
-  penisDown = loadImage('foto/mario.png');
+  buisDown = loadImage('foto/buisdown.webp');
   mario = loadImage('foto/mario.png');
-  dead = loadImage ('foto/dead.gif')
+  dead = loadImage ('foto/dead.gif');
+  heehee = loadSound('music/hee-hee.mp3');
+  
 }
 
 class Ball {
@@ -166,7 +168,7 @@ function addBlocks() {
   let randHeight = random(height / 2);
   let gapHeight = 150;
 
-  let newRectTop = new Block(buisUp,740, 0, randHeight, "green");
+  let newRectTop = new Block(buisDown,740, 0, randHeight, "green");
   let newRectBot = new Block(buisUp,740, randHeight + gapHeight, height + (randHeight + gapHeight), "green");
 
   rects.push(newRectBot);
