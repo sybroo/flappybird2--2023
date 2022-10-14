@@ -36,9 +36,9 @@ class Ball {
     this.vy += gravity;
 
     this.y += this.vy;
-    if (this.y > 390) {
+    if (this.y > 355) {
       this.vy = 0;
-      this.y = 390;
+      this.y = 355;
     }
 
     if (this.y < 0) {
