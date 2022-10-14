@@ -9,7 +9,7 @@ var score = 0;
 
 function preload() {
   img = loadImage('foto/menu.jpg');
-  buisUp = loadImage('foto/buis.webp'); //pijpenplaajte aanpassen dagoe syb
+  buisUp = loadImage('foto/buis.webp');
   buisDown = loadImage('foto/buisdown.webp');
   mario = loadImage('foto/mario.png');
   dead = loadImage ('foto/dead.gif');
@@ -152,7 +152,7 @@ function gameOver() {
   text("Press Esc to go to menu", 30, 200) 
   text("GAME OVER", 150, 100)
   textSize(60)
-   
+  jump.stop(); 
 
 
 
